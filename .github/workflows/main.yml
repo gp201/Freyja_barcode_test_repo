@@ -16,6 +16,5 @@ jobs:
       - name: Run
         shell: bash {0}
         run: |
-          cd test_repo
           cd h3n2_ha
           bash preprocess.sh
