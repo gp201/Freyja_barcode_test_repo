@@ -1,21 +1,21 @@
 # exit when any command fails
 set -e
 
-# ENV name
-RUN_ENV=freyja-h3n2-pathogen
+# # ENV name
+# RUN_ENV=freyja-h3n2-pathogen
 
-if { conda env list | grep $RUN_ENV; } >/dev/null 2>&1; then 
-    echo "Updaing conda env $RUN_ENV"
-    eval "$(conda shell.bash hook)"
-    conda env update -name $RUN_ENV -f env/conda_environment.yml
-else
-    echo "Installing conda env $RUN_ENV"
-    eval "$(conda shell.bash hook)"
-    conda env create -f env/conda_environment.yml
-fi
+# if { conda env list | grep $RUN_ENV; } >/dev/null 2>&1; then 
+#     echo "Updaing conda env $RUN_ENV"
+#     eval "$(conda shell.bash hook)"
+#     conda env update -name $RUN_ENV -f env/conda_environment.yml
+# else
+#     echo "Installing conda env $RUN_ENV"
+#     eval "$(conda shell.bash hook)"
+#     conda env create -f env/conda_environment.yml
+# fi
 
-eval "$(conda shell.bash hook)"
-conda activate $RUN_ENV
+# eval "$(conda shell.bash hook)"
+# conda activate $RUN_ENV
 
 # download sequences from GISAID with the EPI_ID
 cat gisaid_seqs/*.fasta > combined_seqs.fasta

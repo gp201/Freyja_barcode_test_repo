@@ -11,8 +11,9 @@ jobs:
       - name: Setup for conda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          auto-activate-base: true
-          activate-environment: ""
+          activate-environment: freyja-h3n2-pathogen
+          environment-file: h3n2_ha/env/conda_environment.yml
+          auto-activate-base: false
       - name: Run
         shell: bash {0}
         run: |
