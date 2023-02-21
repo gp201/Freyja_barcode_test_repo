@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch:
+  
+jobs:
+  my_job:
+    name: Run workflow
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Setup for conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:        
+          auto-update-conda: true
+          channels: bioconda,conda-forge
+          channel-priority: true
+          python-version: 3.7
+          activate-environment: base
+      - name: Run
+        shell: bash {0}
+        run: bash preprocess.sh
