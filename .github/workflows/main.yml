@@ -18,4 +18,7 @@ jobs:
           activate-environment: base
       - name: Run
         shell: bash {0}
-        run: bash preprocess.sh
+        run: |
+          cd test_repo
+          cd h3n2_ha
+          bash preprocess.sh
