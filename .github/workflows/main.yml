@@ -13,6 +13,7 @@ jobs:
         with:
           activate-environment: freyja-h3n2-pathogen
           environment-file: h3n2_ha/env/conda_environment.yml
+          python-version: 3.8
           auto-activate-base: false
       - name: Run
         shell: bash {0}
