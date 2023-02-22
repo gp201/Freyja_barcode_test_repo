@@ -7,6 +7,9 @@ jobs:
   my_job:
     name: Run workflow
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
@@ -19,7 +22,7 @@ jobs:
           python-version: 3.8
           auto-activate-base: false
       - name: Run
-        shell: bash {0}
         run: |
+          conda activate freyja-h3n2-pathogen
           cd h3n2_ha
           bash preprocess.sh
