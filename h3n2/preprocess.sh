@@ -1,5 +1,7 @@
 # exit when any command fails
 set -e
+# print each command before executing
+set -x
 
 # # ENV name
 # RUN_ENV=freyja-h3n2-pathogen
@@ -31,11 +33,14 @@ cd ..
 python3 code/clean_lineages.py lineages.tsv
 python3 code/extract_dates.py extracted_sequences_renamed.fasta dates.tsv
 python3 code/generate_metadata_file.py dates.tsv clean_lineages.tsv metadata.tsv
-echo 'bash run_nf.sh /raid/gp/Freyja/h3n2_ha/ /raid/gp/Freyja/h3n2_ha/extracted_sequences_renamed.fasta /raid/gp/Freyja/h3n2_ha/metadata.tsv --strain_column "strain" --skip_clade_annotations true --align_to_reference true --reference /raid/gp/Freyja/h3n2_ha/reference_seq.fasta --tree_file /raid/gp/Freyja/h3n2_ha/nextstrain_flu_seasonal_h3n2_ha_2y_timetree_renamed.nwk'
 
-git clone https://github.com/gp201/Freyja_pathogen_workflow.git
-cd Freyja_pathogen_workflow
 # get current directory and place it in a variable
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-# replace /raid/gp/Freyja/h3n2_ha/ with the 
+
+# Clone the Freyja pathogen workflow
+git clone https://github.com/gp201/Freyja_pathogen_workflow.git
+cd Freyja_pathogen_workflow
+
+# print and run the below command
+
 bash run_nf.sh $DIR/ $DIR/extracted_sequences_renamed.fasta $DIR/metadata.tsv --strain_column "strain" --skip_clade_annotations true --align_to_reference true --reference $DIR/reference_seq.fasta --tree_file $DIR/nextstrain_flu_seasonal_h3n2_ha_2y_timetree_renamed.nwk
