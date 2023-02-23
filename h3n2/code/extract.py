@@ -53,7 +53,32 @@ def add_row_number_to_EPI_ID(seq, number):
 
 extracted_sequences_names = pd.DataFrame(columns=['trimmed_seq_name', 'complete_seq_name'])
 extracted_sequences_names['trimmed_seq_name'] = extract_list['strain'].values
-extracted_sequences_names['complete_seq_name'] = extracted_sequences_names['trimmed_seq_name'].progress_apply(get_fasta_names)
+
+# split dataframe into chunks and use multiprocess to speed up process
+# https://stackoverflow.com/questions/26520781/apply-function-to-each-row-in-a-pandas-dataframe-using-multiprocessing
+
+import multiprocessing
+
+# split dataframe into chunks
+# https://stackoverflow.com/questions/26520781/apply-function-to-each-row-in-a-pandas-dataframe-using-multiprocessing
+
+def split_dataframe(df, chunk_size):
+    num_chunks = len(df) // chunk_size + 1
+    return np.array_split(df, num_chunks)
+
+num_of_cores = multiprocessing.cpu_count()
+
+# create a pool of workers based on the number of cores
+pool = multiprocessing.Pool(processes=num_of_cores*2)
+# split dataframe into chunks
+chunks = split_dataframe(extracted_sequences_names, 1000)
+# apply function to each chunk
+extracted_sequences_names['complete_seq_name'] = pd.concat(pool.map(lambda x: x.progress_apply(lambda y: get_fasta_names(y['trimmed_seq_name']), axis=1), chunks))
+# close pool
+pool.close()
+pool.join()
+
+# extracted_sequences_names['complete_seq_name'] = extracted_sequences_names['trimmed_seq_name'].progress_apply(get_fasta_names)
 
 # check if the total number of duplicate sequences is less than 1% of the total number of sequences
 # sum all value counts greater than 1

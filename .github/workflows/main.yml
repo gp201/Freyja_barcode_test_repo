@@ -70,7 +70,6 @@ jobs:
           cd ${{ matrix.suite }}
           bash preprocess.sh
       - name: Uploading folder as artifact
-        if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.suite }}-failed
