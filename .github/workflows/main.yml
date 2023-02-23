@@ -30,6 +30,11 @@ jobs:
           matrix=$(echo $matrix | jq -c .)
           echo "Matrix: $matrix"
           echo "job-strategy-matrix=$matrix" >> $GITHUB_OUTPUT
+          # if matrix is empty, terminate the workflow
+          if [ "$matrix" = "[]" ]; then
+            echo "No changed folders, terminating workflow"
+            exit 78
+          fi
           
   my_job:
     needs: generate-job-strategy-matrix
@@ -43,12 +48,6 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      # if suite is empty, skip this job
-      - name: Skip if suite is empty
-        if: ${{ !matrix.suite }}
-        run: |
-          echo "Suite is empty, skipping this job"
-          exit 78
       - name: Checkout
         uses: actions/checkout@v3.3.0
       - name: Setup for conda
