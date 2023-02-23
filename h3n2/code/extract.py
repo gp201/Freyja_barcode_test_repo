@@ -61,7 +61,6 @@ import numpy as np
 import multiprocessing
 
 num_cores = multiprocessing.cpu_count()
-num_cores = num_cores * 2
 
 def parallelize_dataframe(df, func):
     df_split = np.array_split(df, num_cores)
