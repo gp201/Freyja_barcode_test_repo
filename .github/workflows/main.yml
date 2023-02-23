@@ -25,6 +25,9 @@ jobs:
           echo "Changed folders: $changed_folders"
           matrix=$(echo $changed_folders | jq -R 'split(" ") | map(select(length > 0))')
           echo "Matrix: $matrix"
+          # convert to JSON string
+          matrix=$(echo $matrix | jq -c .)
+          echo "Matrix: $matrix"
           echo "job-strategy-matrix=$matrix" >> $GITHUB_OUTPUT
           
   my_job:
