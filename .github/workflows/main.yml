@@ -24,7 +24,8 @@ jobs:
           changed_folders=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | cut -d/ -f1 | uniq)
           echo "Changed folders: $changed_folders"
           matrix=$(echo $changed_folders | jq -R 'split(" ") | map(select(length > 0))')
-          echo "Matrix: $matrix"
+          # remove duplicates and .github folder
+          matrix=$(echo $matrix | jq -c 'unique | . - [""] - [".github"]')
           # convert to JSON string
           matrix=$(echo $matrix | jq -c .)
           echo "Matrix: $matrix"
@@ -42,6 +43,12 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
+      # if suite is empty, skip this job
+      - name: Skip if suite is empty
+        if: ${{ !matrix.suite }}
+        run: |
+          echo "Suite is empty, skipping this job"
+          exit 78
       - name: Checkout
         uses: actions/checkout@v3.3.0
       - name: Setup for conda
