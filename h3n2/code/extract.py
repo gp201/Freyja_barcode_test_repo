@@ -58,6 +58,7 @@ extracted_sequences_names['trimmed_seq_name'] = extract_list['strain'].values
 # https://stackoverflow.com/questions/26520781/apply-function-to-each-row-in-a-pandas-dataframe-using-multiprocessing
 
 import multiprocessing
+import numpy as np
 
 # split dataframe into chunks
 # https://stackoverflow.com/questions/26520781/apply-function-to-each-row-in-a-pandas-dataframe-using-multiprocessing
