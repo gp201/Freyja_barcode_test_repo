@@ -29,6 +29,7 @@ jobs:
           
   my_job:
     needs: generate-job-strategy-matrix
+    runs-on: ${{ matrix.os }}
     name: Run workflow
     strategy:
       matrix:
