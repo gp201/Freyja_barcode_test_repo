@@ -2,11 +2,37 @@ name: generate barcode
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   
 jobs:
+  # Get the list of folders where files have changed and generate a matrix
+  # of jobs to run.
+  generate-job-strategy-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      job-strategy-matrix: ${{ steps.generate-matrix.outputs.job-strategy-matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+        with:
+          fetch-depth: 0
+      - name: Generate matrix
+        id: generate-matrix
+        run: |
+          changed_folders=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | cut -d/ -f1 | uniq)
+          echo "Changed folders: $changed_folders"
+          matrix=$(echo $changed_folders | jq -R 'split(" ") | map(select(length > 0))')
+          echo "Matrix: $matrix"
+          echo "job-strategy-matrix=$matrix" >> $GITHUB_OUTPUT
+          
   my_job:
+    needs: generate-job-strategy-matrix
     name: Run workflow
-    runs-on: ubuntu-22.04
+    matrix:
+      os: [ubuntu-22.04]
+      suite: ${{ fromJson(needs.generate-job-strategy-matrix.outputs.job-strategy-matrix) }}
     defaults:
       run:
         shell: bash -el {0}
@@ -16,15 +42,15 @@ jobs:
       - name: Setup for conda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: freyja-h3n2-pathogen
-          environment-file: h3n2_ha/env/conda_environment.yml
+          activate-environment: freyja-${{ matrix.suite }}-pathogen
+          environment-file: ${{ matrix.suite }}/env/conda_environment.yml
           mamba-version: "*"
           python-version: 3.8
           auto-activate-base: false
       - name: Run
         run: |
-          conda activate freyja-h3n2-pathogen
-          cd h3n2_ha
+          conda activate freyja-${{ matrix.suite }}-pathogen
+          cd ${{ matrix.suite }}
           bash preprocess.sh
       - name: Uploading folder as artifact
         if: ${{ failure() }}
