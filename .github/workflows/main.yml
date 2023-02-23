@@ -30,9 +30,10 @@ jobs:
   my_job:
     needs: generate-job-strategy-matrix
     name: Run workflow
-    matrix:
-      os: [ubuntu-22.04]
-      suite: ${{ fromJson(needs.generate-job-strategy-matrix.outputs.job-strategy-matrix) }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+        suite: ${{ fromJson(needs.generate-job-strategy-matrix.outputs.job-strategy-matrix) }}
     defaults:
       run:
         shell: bash -el {0}
