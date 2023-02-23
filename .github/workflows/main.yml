@@ -2,6 +2,12 @@ name: generate barcode
 
 on:
   workflow_dispatch:
+    inputs:
+      suite:
+        description: 'Suite to run'
+        required: true
+        default: 'h3n2'
+
   push:
     branches:
       - main
@@ -21,6 +27,10 @@ jobs:
       - name: Generate matrix
         id: generate-matrix
         run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "job-strategy-matrix=[\"${{ github.event.inputs.suite }}\"]" >> $GITHUB_OUTPUT
+            exit 0
+          fi
           changed_folders=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | cut -d/ -f1 | uniq)
           echo "Changed folders: $changed_folders"
           matrix=$(echo $changed_folders | jq -R 'split(" ") | map(select(length > 0))')
