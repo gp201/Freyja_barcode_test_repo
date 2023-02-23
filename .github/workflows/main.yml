@@ -30,10 +30,10 @@ jobs:
           matrix=$(echo $matrix | jq -c .)
           echo "Matrix: $matrix"
           echo "job-strategy-matrix=$matrix" >> $GITHUB_OUTPUT
-          # if matrix is empty, terminate the workflow
+          # if matrix is empty, don't run any jobs
           if [ "$matrix" = "[]" ]; then
-            echo "No changed folders, terminating workflow"
-            exit 78
+            echo "No jobs to run"
+            echo "job-strategy-matrix=[{ \"suite\": \"\", \"os\": \"\" }]" >> $GITHUB_OUTPUT
           fi
           
   my_job:
