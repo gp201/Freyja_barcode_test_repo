@@ -38,4 +38,4 @@ cd Freyja_pathogen_workflow
 # get current directory and place it in a variable
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # replace /raid/gp/Freyja/h3n2_ha/ with the 
-bash run_nf.sh $DIR $DIR/extracted_sequences_renamed.fasta $DIR/metadata.tsv --strain_column "strain" --skip_clade_annotations true --align_to_reference true --reference $DIR/reference_seq.fasta --tree_file $DIR/nextstrain_flu_seasonal_h3n2_ha_2y_timetree_renamed.nwk
+bash run_nf.sh $DIR/ $DIR/extracted_sequences_renamed.fasta $DIR/metadata.tsv --strain_column "strain" --skip_clade_annotations true --align_to_reference true --reference $DIR/reference_seq.fasta --tree_file $DIR/nextstrain_flu_seasonal_h3n2_ha_2y_timetree_renamed.nwk

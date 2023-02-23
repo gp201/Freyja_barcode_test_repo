@@ -26,3 +26,9 @@ jobs:
           conda activate freyja-h3n2-pathogen
           cd h3n2_ha
           bash preprocess.sh
+      - name: Uploading folder as artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-coverage-${{ matrix.num_runs }}
+          path: /home/runner/work/test_repo/
