@@ -30,13 +30,9 @@ jobs:
           matrix=$(echo $matrix | jq -c .)
           echo "Matrix: $matrix"
           echo "job-strategy-matrix=$matrix" >> $GITHUB_OUTPUT
-          # if matrix is empty, don't run any jobs
-          if [ "$matrix" = "[]" ]; then
-            echo "No jobs to run"
-            echo "job-strategy-matrix=[{ \"suite\": \"\", \"os\": \"\" }]" >> $GITHUB_OUTPUT
-          fi
           
   my_job:
+    if : ${{ !contains(needs.generate-job-strategy-matrix.outputs.job-strategy-matrix, '[]') }}
     needs: generate-job-strategy-matrix
     runs-on: ${{ matrix.os }}
     name: Run workflow
