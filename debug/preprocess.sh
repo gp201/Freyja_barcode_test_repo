@@ -12,6 +12,8 @@ cd Freyja_pathogen_workflow
 
 conda env create -f env/usher-env.yml
 
+# restart the terminal
+eval "$(conda shell.bash hook)"
 conda activate freyja-pathogen-usher
 
 faToVcf -h
