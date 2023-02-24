@@ -1,6 +1,6 @@
 # download sequences from GISAID with the EPI_ID
-cat gisaid_seqs/*.fasta > combined_seqs.fasta
-python3 code/clean_fasta.py combined_seqs.fasta combined_seqs_clean.fasta
+# cat gisaid_seqs/*.fasta > combined_seqs.fasta
+# python3 code/clean_fasta.py combined_seqs.fasta combined_seqs_clean.fasta
 
 # get current directory and place it in a variable
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -10,13 +10,13 @@ git clone https://github.com/gp201/Freyja_pathogen_workflow.git
 
 cd Freyja_pathogen_workflow
 
-conda env create -f env/usher-env.yml
+# conda env create -f env/usher-env.yml
 
-# restart the terminal
-eval "$(conda shell.bash hook)"
-conda activate freyja-pathogen-usher
+# # restart the terminal
+# eval "$(conda shell.bash hook)"
+# conda activate freyja-pathogen-usher
 
-faToVcf -h
+# faToVcf -h
 
 # print and run the below command
 
