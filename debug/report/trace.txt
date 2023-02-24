@@ -1,5 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-3	77/50fc52	7328	basic_checks	COMPLETED	0	2023-02-23 22:37:28.034	617ms	514ms	79.2%	32.1 MB	224.8 MB	14.7 MB	198 B
-1	3f/d23988	7330	generate_clade_tsv	COMPLETED	0	2023-02-23 22:37:28.051	757ms	564ms	63.0%	19 MB	210.3 MB	8.7 MB	38.7 KB
-2	13/4fb6bc	7529	align	COMPLETED	0	2023-02-23 22:37:28.680	1m 14s	1m 14s	191.6%	722.1 MB	1.4 GB	65 MB	18.6 MB
-4	51/eda0f8	21949	generate_vcf	FAILED	127	2023-02-23 22:38:42.527	80ms	27ms	-	-	-	-	-
