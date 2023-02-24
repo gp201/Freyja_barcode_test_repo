@@ -6,7 +6,7 @@ on:
       suite:
         description: 'Suite to run'
         required: true
-        default: 'h3n2'
+        default: 'debug'
 
   push:
     branches:
