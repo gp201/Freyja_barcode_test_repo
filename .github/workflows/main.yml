@@ -92,4 +92,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.suite }}-failed
-          path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ matrix.suite }}/output
+          path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ matrix.suite }}
