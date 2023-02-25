@@ -11,7 +11,7 @@ jobs:
         run: |
           # bash script to delete all artifacts
           # loop over all artifacts
-          # delete each artifact
-          for artifact in $(curl -s -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts | jq -r '.artifacts[] | .id'); do
-            curl -X DELETE -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts/$artifact
+          # delete each artifact for private repos
+          for artifact in $(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts | jq -r '.artifacts[] | .id'); do
+            curl -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts/$artifact
           done
