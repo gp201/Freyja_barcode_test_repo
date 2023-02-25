@@ -85,6 +85,9 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           # git add output folder and report folder
-          git add output report
-          git commit -m "Update output folder and report folder"
+          git add output/auspice_tree.json
+          git add output/auspice_tree.json
+          git add report/barcode.csv
+          git add report/barcode.html
+          git commit -m "Update barcode for ${{ matrix.suite }}"
           git push
