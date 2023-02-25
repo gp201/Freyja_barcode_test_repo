@@ -10,6 +10,8 @@ git clone https://github.com/gp201/Freyja_pathogen_workflow.git
 
 cd Freyja_pathogen_workflow
 
+conda info
+
 # conda env create -f env/usher-env.yml
 
 # # restart the terminal
