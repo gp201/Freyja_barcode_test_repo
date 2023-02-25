@@ -1,5 +1,5 @@
 name: clean artifacts
-run-name: ${{ github.event.inputs.days }}
+run-name: ${{ github.event.inputs.reason }} - ${{ github.event.inputs.days }} days
 
 on:
   workflow_dispatch:
