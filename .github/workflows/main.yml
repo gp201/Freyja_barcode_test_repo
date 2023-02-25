@@ -78,3 +78,13 @@ jobs:
         with:
           name: ${{ matrix.suite }}-failed
           path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ matrix.suite }}/
+      - name: Push output folder and report folder to repo
+        if: success()
+        run: |
+          cd ${{ matrix.suite }}
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          # git add output folder and report folder
+          git add output report
+          git commit -m "Update output folder and report folder"
+          git push
