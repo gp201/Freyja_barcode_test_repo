@@ -70,7 +70,7 @@ jobs:
           version: 22.04.5
       - name: Run
         run: |
-          # conda activate freyja-${{ matrix.suite }}-pathogen
+          conda activate freyja-${{ matrix.suite }}-pathogen
           cd ${{ matrix.suite }}
           bash preprocess.sh
       - name: Uploading folder as artifact
