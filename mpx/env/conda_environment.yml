@@ -1,0 +1,11 @@
+name: freyja-mpx-pathogen
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - pandas==1.4.1
+    - tqdm==4.61.2
+    - biopython==1.79
