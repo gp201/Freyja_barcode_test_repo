@@ -46,10 +46,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Run workflow
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-22.04]
         suite: ${{ fromJson(needs.generate-job-strategy-matrix.outputs.job-strategy-matrix) }}
-        fail-fast: false
     defaults:
       run:
         shell: bash -el {0}
