@@ -77,4 +77,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.suite }}-failed
-          path: /home/runner/work/test_repo/
+          path: /home/runner/work/test_repo/${{ matrix.suite }}/
