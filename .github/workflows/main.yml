@@ -1,5 +1,5 @@
 name: generate barcode
-
+run-name: Generate barcode for ${{ matrix.suite }}
 on:
   workflow_dispatch:
     inputs:
