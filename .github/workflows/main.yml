@@ -71,12 +71,6 @@ jobs:
         run: |
           cd ${{ matrix.suite }}
           bash preprocess.sh
-      - name: Uploading folder as artifact
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ matrix.suite }}-failed
-          path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ matrix.suite }}/
       - name: Update repository and push output folder and report folder to repo
         if: success()
         run: |
@@ -92,4 +86,10 @@ jobs:
           git add output/barcode.csv
           git add output/barcode.html
           git commit -m "Update barcode for ${{ matrix.suite }}"
-          git push
+          git push origin main
+      - name: Uploading folder as artifact
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.suite }}-failed
+          path: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/${{ matrix.suite }}/output
