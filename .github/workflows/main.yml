@@ -71,7 +71,6 @@ jobs:
       - name: Run
         run: |
           cd ${{ matrix.suite }}
-          conda deactivate
           bash preprocess.sh
       - name: Uploading folder as artifact
         if: failure()
