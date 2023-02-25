@@ -49,6 +49,7 @@ jobs:
       matrix:
         os: [ubuntu-22.04]
         suite: ${{ fromJson(needs.generate-job-strategy-matrix.outputs.job-strategy-matrix) }}
+        fail-fast: false
     defaults:
       run:
         shell: bash -el {0}
