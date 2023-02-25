@@ -45,6 +45,9 @@ jobs:
     needs: generate-job-strategy-matrix
     runs-on: ${{ matrix.os }}
     name: Run workflow
+    concurrency:
+      group: ${{ matrix.suite }}
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
