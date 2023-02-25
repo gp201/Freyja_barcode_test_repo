@@ -59,7 +59,7 @@ jobs:
       - name: Setup for conda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: ""
+          activate-environment: freyja-${{ matrix.suite }}-pathogen
           environment-file: ${{ matrix.suite }}/env/conda_environment.yml
           mamba-version: "*"
           python-version: 3.8
@@ -70,8 +70,8 @@ jobs:
           version: 22.04.5
       - name: Run
         run: |
-          conda activate freyja-${{ matrix.suite }}-pathogen
           cd ${{ matrix.suite }}
+          conda deactivate
           bash preprocess.sh
       - name: Uploading folder as artifact
         if: failure()
