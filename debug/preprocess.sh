@@ -31,6 +31,7 @@ git clone https://github.com/gp201/Freyja_pathogen_workflow.git
 cd Freyja_pathogen_workflow
 
 eval "$(conda shell.bash hook)"
+conda deactivate
 
 # print and run the below command
 
