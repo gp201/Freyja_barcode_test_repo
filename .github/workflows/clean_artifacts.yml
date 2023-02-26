@@ -22,10 +22,12 @@ jobs:
           # bash script to delete all artifacts
           # loop over all artifacts
           # delete each artifact for private repos
-          for artifact in $(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts | jq -r '.artifacts[] | .id | .created_at'); do
-          # if created before 30 days ago delete
+          for artifact in $(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts | jq -r '.artifacts[] | "\(.id)&\(.created_at)"'); do
+          # if created before x days ago delete
+            artifact_id=$(echo $artifact | cut -d'&' -f1)
+            created_at=$(echo $artifact | cut -d'&' -f2)
             if [[ $(date -d "$created_at" +%s) -lt $(date -d "${{ github.event.inputs.days }} days ago" +%s) ]]; then
               # delete artifact
-              curl -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts/$artifact
+              curl -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${{github.repository_owner}}/${{ github.event.repository.name }}/actions/artifacts/$artifact_id
             fi
           done
