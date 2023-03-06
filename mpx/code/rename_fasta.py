@@ -15,7 +15,7 @@ with open(fasta, 'r') as f:
         if line.startswith('>'):
             # Get the strain name from the tab-delimited file
             try:
-                strain = df.loc[df['accession'] == line[1:].strip(), 'strain'].values[0]
+                strain = df.loc[df['accession'] == line[1:].split('|')[0].strip(), 'strain'].values[0]
             except IndexError:
                 print('No strain name found for accession id: {}'.format(line[1:].strip()))
                 continue

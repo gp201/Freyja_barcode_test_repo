@@ -24,7 +24,7 @@ wget https://data.nextstrain.org/files/workflows/monkeypox/alignment.fasta.xz
 # unzip the file
 unxz alignment.fasta.xz
 
-python3 code/extract_seqs.py alignment.fasta nextstrain_monkeypox_hmpxv1_metadata.tsv
+python3 code/extract_seqs.py alignment.fasta nextstrain_monkeypox_hmpxv1_metadata.tsv reference_seq.fasta
 python3 code/rename_fasta.py extracted_seqs.fasta nextstrain_monkeypox_hmpxv1_metadata.tsv
 cat reference_seq.fasta extracted_seqs.fasta > combined_seqs.fasta
 
