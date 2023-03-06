@@ -24,8 +24,8 @@ df['date'] = df['date'].apply(lambda x: x.split(' ')[0])
 # read reference sequence from fasta file
 with open(reference_seq_file, 'r') as f:
     # extract the accession id and date from the fasta header (format >accession_id|date)
-    ref_seq, date = f.readline()[1:].strip().split('|')
+    fasta_header = f.readline()[1:].strip()
 # add reference sequence to the metadata file
-df = pd.concat([df, pd.DataFrame({'strain': ref_seq, 'accession': ref_seq, 'date': date}, index=[0])])
+df = pd.concat([df, pd.DataFrame({'strain': fasta_header, 'accession': fasta_header, 'date': '2018-08-01'}, index=[0])])
 # write the formatted metadata file to a new file
 df.to_csv('formatted_metadata.tsv', sep='\t', index=False)
