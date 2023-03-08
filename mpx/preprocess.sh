@@ -39,4 +39,4 @@ eval "$(conda shell.bash hook)"
 conda deactivate
 
 # print and run the below command
-bash run_nf.sh $DIR/ $DIR/combined_seqs.fasta $DIR/formatted_metadata.tsv --align_to_reference true --reference $DIR/reference_seq.fasta --align_mode mafft --strain_column "strain" --date_column "Date" --skip_clade_annotations true --tree_file $DIR/nextstrain_monkeypox_hmpxv1_timetree.nwk
+bash run_nf.sh $DIR/ $DIR/combined_seqs.fasta $DIR/formatted_metadata.tsv --reference $DIR/reference_seq.fasta --strain_column "strain" --date_column "Date" --skip_clade_annotations true --tree_file $DIR/nextstrain_monkeypox_hmpxv1_timetree.nwk

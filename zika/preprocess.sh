@@ -35,5 +35,5 @@ conda deactivate
 
 # print and run the below command
 echo "cannot run since phyclip is not installed"
-# bash run_nf.sh $DIR/ $DIR/renamed_zika_genomes.fasta $DIR/zika_dates.csv --strain_column "name" --skip_clade_annotations true --align_to_reference true --reference $DIR/reference_seq.fasta --tree_file $DIR/nextstrain_flu_seasonal_h3n2_ha_2y_timetree_renamed.nwk
+# bash run_nf.sh $DIR/ $DIR/renamed_zika_genomes.fasta $DIR/zika_dates.csv --strain_column "name" --skip_clade_annotations true --reference $DIR/reference_seq.fasta --tree_file $DIR/nextstrain_flu_seasonal_h3n2_ha_2y_timetree_renamed.nwk
 
