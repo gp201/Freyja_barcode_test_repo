@@ -30,6 +30,9 @@ cat reference_seq.fasta extracted_seqs.fasta > combined_seqs.fasta
 
 # get current directory and place it in a variable
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+#get number of cores
+CORES=$(grep -c ^processor /proc/cpuinfo)
+
 
 # Clone the Freyja pathogen workflow
 git clone https://github.com/gp201/Freyja_pathogen_workflow.git
@@ -39,4 +42,4 @@ eval "$(conda shell.bash hook)"
 conda deactivate
 
 # print and run the below command
-bash run_nf.sh $DIR/ $DIR/combined_seqs.fasta $DIR/formatted_metadata.tsv --reference $DIR/reference_seq.fasta --strain_column "strain" --date_column "Date" --skip_clade_annotations true --tree_file $DIR/nextstrain_monkeypox_hmpxv1_timetree.nwk
+bash run_nf.sh $DIR/ $DIR/combined_seqs.fasta $DIR/formatted_metadata.tsv --reference $DIR/reference_seq.fasta --threads $CORES --strain_column "strain" --date_column "Date" --skip_clade_annotations true --tree_file $DIR/nextstrain_monkeypox_hmpxv1_timetree.nwk
