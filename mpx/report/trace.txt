@@ -1,0 +1,9 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	ed/fcb0ad	5680	generate_clade_tsv	COMPLETED	0	2023-03-11 01:06:53.582	3s	805ms	49.1%	22.3 MB	121.4 MB	8.9 MB	36.3 KB
+2	31/cb38c5	5798	basic_checks	COMPLETED	0	2023-03-11 01:06:56.662	7.6s	4.9s	59.1%	795.7 MB	931.1 MB	495.3 MB	193 B
+3	3e/595e5d	4552	align	COMPLETED	0	2023-03-11 01:06:24.776	1m 57s	1m 55s	143.6%	1.3 GB	2.2 GB	761 MB	754.5 MB
+4	c0/a7c7d1	8162	generate_vcf	COMPLETED	0	2023-03-11 01:09:25.109	4.4s	3.2s	100.3%	249.4 MB	262.1 MB	236.8 MB	6.2 MB
+5	8d/fb00a1	8388	generate_protobuf_tree	COMPLETED	0	2023-03-11 01:09:29.700	2.5s	1.2s	185.2%	11.5 MB	157.9 MB	6.5 MB	221 KB
+6	bb/295f02	8560	annotate_tree	COMPLETED	0	2023-03-11 01:09:32.217	1.7s	469ms	170.8%	12.9 MB	159.6 MB	342.4 KB	261.3 KB
+7	fe/16bd9d	8677	extract_clades	COMPLETED	0	2023-03-11 01:09:33.945	1.7s	430ms	100.0%	13.6 MB	159.7 MB	308.6 KB	359.4 KB
+8	de/5c6bbd	8794	generate_barcodes	COMPLETED	0	2023-03-11 01:09:35.639	2.3s	1.1s	117.6%	20.4 MB	116.6 MB	21.9 MB	246.7 KB
